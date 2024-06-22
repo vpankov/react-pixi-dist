@@ -129,10 +129,15 @@ class Stage extends React.Component
             options,
             raf,
             renderOnComponentChange,
+            canvasId,
         } = this.props;
 
-        if(!window.canvasTest) {
-            window.canvasTest = new Application({
+        if(!window.webGLContext) {
+            window.webGLContext = {};
+        }
+
+        if(!window.webGLContext[canvasId]) {
+            window.webGLContext[canvasId] = new Application({
                 width,
                 height,
                 ...options,
@@ -140,8 +145,21 @@ class Stage extends React.Component
             });
         }
 
-            this.app = window.canvasTest;
-            this.myRef.current.appendChild(window.canvasTest.view)
+        this.app = window.webGLContext[canvasId];
+
+        if(this.props.id) {
+            this.app.view.id = this.props.id;
+        }
+
+        if(this.props.width || this.props.height) {
+            this.app.renderer.resize(this.props.width || 100, this.props.height || 100);
+        }
+
+        if(this.props.resolution) {
+            this.app.renderer.resolution = this.props.resolution;
+        }
+
+        this.myRef.current.appendChild(this.app.view)
 
         if (process.env.NODE_ENV === 'development')
         {
@@ -300,32 +318,23 @@ class Stage extends React.Component
     {
         this.props.onUnmount(this.app);
 
-        // if (this._ticker)
-        // {
-        //     this._ticker.remove(this.renderStage);
-        //     this._ticker.destroy();
-        // }
+        const stage = this.app.stage;
 
-        // this.app.stage.off(
-        //     '__REACT_PIXI_REQUEST_RENDER__',
-        //     this.needsRenderUpdate
-        // );
+        if (this._ticker)
+        {
+            this._ticker.remove(this.renderStage);
+            this._ticker.destroy();
+        }
 
-        // PixiFiber.updateContainer(null, this.mountNode, this);
-
-        // if (this._mediaQuery)
-        // {
-        //     this._mediaQuery.removeListener(this.updateSize);
-        //     this._mediaQuery = null;
-        // }
-
-        const stage = window.canvasTest.stage;
+        if (this._mediaQuery)
+        {
+            this._mediaQuery.removeListener(this.updateSize);
+            this._mediaQuery = null;
+        }
 
         while (stage.children[0]) {
           stage.removeChild(stage.children[0])
         }
-
-        // this.app.destroy();
     }
 
     render()
@@ -343,11 +352,7 @@ class Stage extends React.Component
         }
 
         return (
-            <div ref={this.myRef}></div>
-            // <canvas
-            //     {...getCanvasProps(this.props)}
-            //     ref={(c) => (this._canvas = c)}
-            // />
+            <span ref={this.myRef}></span>
         );
     }
 }

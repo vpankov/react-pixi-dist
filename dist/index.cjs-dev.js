@@ -23852,17 +23852,30 @@ var Stage = /*#__PURE__*/function (_React$Component) {
         height = _this$props3.height,
         options = _this$props3.options,
         raf = _this$props3.raf,
-        renderOnComponentChange = _this$props3.renderOnComponentChange;
-      if (!window.canvasTest) {
-        window.canvasTest = new app.Application(_objectSpread$1(_objectSpread$1({
+        renderOnComponentChange = _this$props3.renderOnComponentChange,
+        canvasId = _this$props3.canvasId;
+      if (!window.webGLContext) {
+        window.webGLContext = {};
+      }
+      if (!window.webGLContext[canvasId]) {
+        window.webGLContext[canvasId] = new app.Application(_objectSpread$1(_objectSpread$1({
           width: width,
           height: height
         }, options), {}, {
           autoDensity: (options === null || options === void 0 ? void 0 : options.autoDensity) !== false
         }));
       }
-      this.app = window.canvasTest;
-      this.myRef.current.appendChild(window.canvasTest.view);
+      this.app = window.webGLContext[canvasId];
+      if (this.props.id) {
+        this.app.view.id = this.props.id;
+      }
+      if (this.props.width || this.props.height) {
+        this.app.renderer.resize(this.props.width || 100, this.props.height || 100);
+      }
+      if (this.props.resolution) {
+        this.app.renderer.resolution = this.props.resolution;
+      }
+      this.myRef.current.appendChild(this.app.view);
       {
         var _this$app$renderer$co;
         // workaround for React 18 Strict Mode unmount causing
@@ -23963,32 +23976,18 @@ var Stage = /*#__PURE__*/function (_React$Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.onUnmount(this.app);
-
-      // if (this._ticker)
-      // {
-      //     this._ticker.remove(this.renderStage);
-      //     this._ticker.destroy();
-      // }
-
-      // this.app.stage.off(
-      //     '__REACT_PIXI_REQUEST_RENDER__',
-      //     this.needsRenderUpdate
-      // );
-
-      // PixiFiber.updateContainer(null, this.mountNode, this);
-
-      // if (this._mediaQuery)
-      // {
-      //     this._mediaQuery.removeListener(this.updateSize);
-      //     this._mediaQuery = null;
-      // }
-
-      var stage = window.canvasTest.stage;
+      var stage = this.app.stage;
+      if (this._ticker) {
+        this._ticker.remove(this.renderStage);
+        this._ticker.destroy();
+      }
+      if (this._mediaQuery) {
+        this._mediaQuery.removeListener(this.updateSize);
+        this._mediaQuery = null;
+      }
       while (stage.children[0]) {
         stage.removeChild(stage.children[0]);
       }
-
-      // this.app.destroy();
     }
   }, {
     key: "render",
@@ -23998,14 +23997,9 @@ var Stage = /*#__PURE__*/function (_React$Component) {
         invariant(options.view instanceof HTMLCanvasElement, 'options.view needs to be a `HTMLCanvasElement`');
         return null;
       }
-      return /*#__PURE__*/React.createElement("div", {
+      return /*#__PURE__*/React.createElement("span", {
         ref: this.myRef
-      })
-      // <canvas
-      //     {...getCanvasProps(this.props)}
-      //     ref={(c) => (this._canvas = c)}
-      // />
-      ;
+      });
     }
   }]);
   return Stage;
