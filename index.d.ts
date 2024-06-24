@@ -307,7 +307,7 @@ declare namespace _ReactPixi
      */
       onUnmount?(app: PixiApplication): void;
 
-      canvasId: string;
+      canvasId?: string;
   };
 
   interface ICustomComponent<
