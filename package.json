@@ -68,7 +68,7 @@
     "react-dom": ">=17.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "@vpankov:registry": "https://npm.pkg.github.com"
   },
   "gitHead": "6d5b98bc6d7eafd1b0016e60a725b2b6c9f46a33"
 }
