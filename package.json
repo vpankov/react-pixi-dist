@@ -21,17 +21,7 @@
     "index.js",
     "module.js"
   ],
-  "scripts": {
-    "prebuild": "npm run clean",
-    "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "cross-env NODE_ENV=development rollup -c",
-    "build:prod": "cross-env NODE_ENV=production rollup -c",
-    "clean": "rimraf ./dist",
-    "test": "jest --silent",
-    "test:ci": "jest --silent --runInBand",
-    "test:types": "tsc --noEmit",
-    "test:watch": "jest --watch"
-  },
+  "scripts": {},
   "dependencies": {
     "lodash.isnil": "4.0.0",
     "lodash.times": "4.3.2",
