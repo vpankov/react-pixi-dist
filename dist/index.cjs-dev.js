@@ -23869,6 +23869,9 @@ var Stage = /*#__PURE__*/function (_React$Component) {
       if (this.props.id) {
         this.app.view.id = this.props.id;
       }
+      if (this.props.style) {
+        Object.assign(this.app.view.style, this.props.style);
+      }
       if (this.props.width || this.props.height) {
         this.app.renderer.resize(this.props.width || 100, this.props.height || 100);
       }
@@ -24007,6 +24010,14 @@ var Stage = /*#__PURE__*/function (_React$Component) {
 Stage.propTypes = propTypes;
 Stage.defaultProps = defaultProps;
 var Stage$1 = Stage;
+
+// const camelToKebabCase = str => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+
+// const applyStyles = (element, styles) => {
+//     for (var key in obj) {
+//         element
+//     }
+// }
 
 function useApp() {
   var app$1 = React.useContext(Context);

@@ -151,6 +151,10 @@ class Stage extends React.Component
             this.app.view.id = this.props.id;
         }
 
+        if(this.props.style) {
+            Object.assign(this.app.view.style, this.props.style);
+        }
+
         if(this.props.width || this.props.height) {
             this.app.renderer.resize(this.props.width || 100, this.props.height || 100);
         }
