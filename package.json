@@ -5,6 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "publishConfig": {
+    "@vpankov:registry": "https://npm.pkg.github.com"
+  },
   "author": "",
   "license": "ISC",
   "types": "./index.d.ts",
