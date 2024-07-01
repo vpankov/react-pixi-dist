@@ -135,7 +135,7 @@ class Stage extends React.Component
         if(!window.webGLContext) {
             window.webGLContext = {};
         }
-
+        debugger;
         if(!window.webGLContext[canvasId]) {
             window.webGLContext[canvasId] = new Application({
                 width,

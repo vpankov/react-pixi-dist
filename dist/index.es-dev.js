@@ -23866,6 +23866,11 @@ var Stage = /*#__PURE__*/function (_React$Component) {
         }, options), {}, {
           autoDensity: (options === null || options === void 0 ? void 0 : options.autoDensity) !== false
         }));
+      } else {
+        var stage = window.webGLContext[canvasId].stage;
+        while (stage.children[0]) {
+          stage.removeChild(stage.children[0]);
+        }
       }
       this.app = window.webGLContext[canvasId];
       if (this.props.id) {

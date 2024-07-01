@@ -23078,6 +23078,9 @@ var devDependencies = {
 	"ts-node": "^10.9.1",
 	typescript: "^4.9.4"
 };
+var publishConfig = {
+	"@vpankov:registry": "https://npm.pkg.github.com"
+};
 var pkg = {
 	name: name,
 	"private": true,
@@ -23091,7 +23094,8 @@ var pkg = {
 },
 	resolutions: resolutions,
 	dependencies: dependencies,
-	devDependencies: devDependencies
+	devDependencies: devDependencies,
+	publishConfig: publishConfig
 };
 
 var performanceNowExports = {};
@@ -23864,6 +23868,11 @@ var Stage = /*#__PURE__*/function (_React$Component) {
         }, options), {}, {
           autoDensity: (options === null || options === void 0 ? void 0 : options.autoDensity) !== false
         }));
+      } else {
+        var stage = window.webGLContext[canvasId].stage;
+        while (stage.children[0]) {
+          stage.removeChild(stage.children[0]);
+        }
       }
       this.app = window.webGLContext[canvasId];
       if (this.props.id) {
