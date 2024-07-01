@@ -23076,6 +23076,9 @@ var devDependencies = {
 	"ts-node": "^10.9.1",
 	typescript: "^4.9.4"
 };
+var publishConfig = {
+	"@vpankov:registry": "https://npm.pkg.github.com"
+};
 var pkg = {
 	name: name,
 	"private": true,
@@ -23089,7 +23092,8 @@ var pkg = {
 },
 	resolutions: resolutions,
 	dependencies: dependencies,
-	devDependencies: devDependencies
+	devDependencies: devDependencies,
+	publishConfig: publishConfig
 };
 
 var performanceNowExports = {};
@@ -23977,6 +23981,8 @@ var Stage = /*#__PURE__*/function (_React$Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.onUnmount(this.app);
+      this.app.view.removeAttribute("style");
+      this.app.view.removeAttribute("id");
       var stage = this.app.stage;
       if (this._ticker) {
         this._ticker.remove(this.renderStage);
@@ -24008,14 +24014,6 @@ var Stage = /*#__PURE__*/function (_React$Component) {
 Stage.propTypes = propTypes;
 Stage.defaultProps = defaultProps;
 var Stage$1 = Stage;
-
-// const camelToKebabCase = str => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
-
-// const applyStyles = (element, styles) => {
-//     for (var key in obj) {
-//         element
-//     }
-// }
 
 function useApp() {
   var app = useContext(Context);

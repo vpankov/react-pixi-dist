@@ -23979,6 +23979,8 @@ var Stage = /*#__PURE__*/function (_React$Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.onUnmount(this.app);
+      this.app.view.removeAttribute("style");
+      this.app.view.removeAttribute("id");
       var stage = this.app.stage;
       if (this._ticker) {
         this._ticker.remove(this.renderStage);
@@ -24010,14 +24012,6 @@ var Stage = /*#__PURE__*/function (_React$Component) {
 Stage.propTypes = propTypes;
 Stage.defaultProps = defaultProps;
 var Stage$1 = Stage;
-
-// const camelToKebabCase = str => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
-
-// const applyStyles = (element, styles) => {
-//     for (var key in obj) {
-//         element
-//     }
-// }
 
 function useApp() {
   var app$1 = React.useContext(Context);
