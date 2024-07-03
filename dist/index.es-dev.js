@@ -23864,6 +23864,7 @@ var Stage = /*#__PURE__*/function (_React$Component) {
         }));
       } else {
         var stage = window.webGLContext[canvasId].stage;
+        // debugger;
         while (stage.children[0]) {
           stage.removeChild(stage.children[0]);
         }
@@ -23993,6 +23994,7 @@ var Stage = /*#__PURE__*/function (_React$Component) {
         this._mediaQuery.removeListener(this.updateSize);
         this._mediaQuery = null;
       }
+      PixiFiber.updateContainer(null, this.mountNode, this);
       while (stage.children[0]) {
         stage.removeChild(stage.children[0]);
       }
