@@ -120,6 +120,8 @@ export type InteractionEvents = {
 
 export const TYPES:Record<string, string>;
 
+export type CanvasIdType = 'primary' | 'secondary';
+
 // private
 declare namespace _ReactPixi
 {
@@ -309,8 +311,6 @@ declare namespace _ReactPixi
 
       canvasId: CanvasIdType;
   };
-
-  export type CanvasIdType = 'primary' | 'secondary'
 
   interface ICustomComponent<
       P extends { [key: string]: any },
