@@ -135,7 +135,7 @@ class Stage extends React.Component
         if(!window.webGLContext) {
             window.webGLContext = {};
         }
-        debugger;
+
         if(!window.webGLContext[canvasId]) {
             window.webGLContext[canvasId] = new Application({
                 width,
@@ -143,6 +143,12 @@ class Stage extends React.Component
                 ...options,
                 autoDensity: options?.autoDensity !== false,
             });
+        } else {
+            const stage = window.webGLContext[canvasId].stage;
+
+            while (stage.children[0]) {
+            stage.removeChild(stage.children[0])
+            }
         }
 
         this.app = window.webGLContext[canvasId];
@@ -321,6 +327,9 @@ class Stage extends React.Component
     componentWillUnmount()
     {
         this.props.onUnmount(this.app);
+
+        this.app.view.removeAttribute("style");
+        this.app.view.removeAttribute("id");
 
         const stage = this.app.stage;
 

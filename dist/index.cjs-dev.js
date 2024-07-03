@@ -23078,9 +23078,6 @@ var devDependencies = {
 	"ts-node": "^10.9.1",
 	typescript: "^4.9.4"
 };
-var publishConfig = {
-	"@vpankov:registry": "https://npm.pkg.github.com"
-};
 var pkg = {
 	name: name,
 	"private": true,
@@ -23094,8 +23091,7 @@ var pkg = {
 },
 	resolutions: resolutions,
 	dependencies: dependencies,
-	devDependencies: devDependencies,
-	publishConfig: publishConfig
+	devDependencies: devDependencies
 };
 
 var performanceNowExports = {};

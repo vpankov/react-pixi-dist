@@ -307,8 +307,10 @@ declare namespace _ReactPixi
      */
       onUnmount?(app: PixiApplication): void;
 
-      canvasId?: string;
+      canvasId: CanvasIdType;
   };
+
+  export type CanvasIdType = 'primary' | 'secondary'
 
   interface ICustomComponent<
       P extends { [key: string]: any },
